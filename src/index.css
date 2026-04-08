@@ -1,0 +1,60 @@
+/* Import Tailwind's three layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Global base overrides ─── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-apple bg-white text-apple-dark;
+  }
+}
+
+/* ─── Custom reusable component classes ─── */
+@layer components {
+  /* Apple-style primary button */
+  .btn-apple {
+    @apply inline-block bg-apple-blue text-white rounded-full
+           px-7 py-3 text-[15px] font-normal
+           transition-all duration-200 hover:bg-apple-blueDark
+           no-underline cursor-pointer;
+  }
+
+  /* Apple-style outline button */
+  .btn-apple-outline {
+    @apply inline-block bg-transparent text-apple-blue
+           border border-apple-blue rounded-full
+           px-7 py-3 text-[15px] font-normal
+           transition-all duration-200
+           hover:bg-apple-blue hover:text-white
+           no-underline cursor-pointer;
+  }
+
+  /* Small uppercase label above headings */
+  .section-label {
+    @apply block text-[12px] font-semibold tracking-[0.1em]
+           uppercase text-apple-gray mb-2.5;
+  }
+}
+
+/* ─── Frosted-glass navbar backdrop ─── */
+.nav-backdrop {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* ─── Hero product image float-in animation ─── */
+@keyframes floatUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-float-up {
+  animation: floatUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
