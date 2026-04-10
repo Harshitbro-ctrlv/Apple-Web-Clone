@@ -1,18 +1,26 @@
 import { useState } from "react";
 
 const NAV_LINKS = [
-  { label: "Store",   href: "#store" },
-  { label: "Mac",     href: "#mac" },
-  { label: "iPhone",  href: "#iphone" },
-  { label: "iPad",    href: "#" },
-  { label: "Watch",   href: "#watch" },
-  { label: "AirPods", href: "#" },
-  { label: "Support", href: "#" },
+  { label: "Store",   action: "store" },
+  { label: "Mac",     action: null },
+  { label: "iPhone",  action: null },
+  { label: "iPad",    action: null },
+  { label: "Watch",   action: null },
+  { label: "AirPods", action: null },
+  { label: "Login",   action: "login" },
+  { label: "Support", action: null },
 ];
 
-export default function Navbar() {
+export default function Navbar({ page, setPage }) {
   // Controls mobile menu open/closed
   const [open, setOpen] = useState(false);
+
+  const handleNavClick = (action) => {
+    if (action) {
+      setPage(action);
+      setOpen(false);
+    }
+  };
 
   return (
     <>
@@ -29,29 +37,37 @@ export default function Navbar() {
         <div className="max-w-[1024px] mx-auto h-full flex items-center justify-between px-5">
 
           {/* Apple logo */}
-          <a href="#">
-          <img
-            src="/apple-logo-svgrepo-com.svg"
-            className="text-[22px] text-apple-dark leading-none h-6 w-5.5"
-            aria-label="Apple home" alt="Apple logo"
+          <button
+            onClick={() => setPage("home")}
+            className="bg-transparent border-none cursor-pointer"
           >
-          </img>
-          </a>
+            <img
+              src="/apple-logo-svgrepo-com.svg"
+              className="text-[22px] text-apple-dark leading-none h-6 w-5.5"
+              aria-label="Apple home"
+              alt="Apple logo"
+            />
+          </button>
 
           {/* Desktop links — hidden below md */}
           <ul className="hidden md:flex list-none" role="list">
-            {NAV_LINKS.map(({ label, href }) => (
+            {NAV_LINKS.map(({ label, action }) => (
               <li key={label}>
-                <a
-                  href={href}
-                  className="
+                <button
+                  onClick={() => handleNavClick(action)}
+                  disabled={!action}
+                  className={`
                     block px-3 text-[12px] leading-[48px] 
-                    text-apple-dark/80 hover:text-apple-dark
-                    transition-opacity duration-150 no-underline
-                  "
+                    transition-opacity duration-150 border-none bg-transparent
+                    ${
+                      action
+                        ? "text-apple-dark/80 hover:text-apple-dark cursor-pointer"
+                        : "text-apple-dark/50 cursor-not-allowed"
+                    }
+                  `}
                 >
                   {label}
-                </a>
+                </button>
               </li>
             ))}
           </ul>
@@ -83,20 +99,24 @@ export default function Navbar() {
           role="dialog"
           aria-label="Mobile navigation"
         >
-          {NAV_LINKS.map(({ label, href }) => (
-            <a
+          {NAV_LINKS.map(({ label, action }) => (
+            <button
               key={label}
-              href={href}
-              onClick={() => setOpen(false)}
-              className="
+              onClick={() => handleNavClick(action)}
+              disabled={!action}
+              className={`
                 w-4/5 text-center py-3.5 text-[17px]
-                text-apple-dark/85 hover:text-apple-dark
-                border-b border-black/[0.08]
-                no-underline transition-opacity
-              "
+                border-b border-black/[0.08] transition-opacity
+                border-none bg-transparent
+                ${
+                  action
+                    ? "text-apple-dark/85 hover:text-apple-dark cursor-pointer"
+                    : "text-apple-dark/50 cursor-not-allowed"
+                }
+              `}
             >
               {label}
-            </a>
+            </button>
           ))}
         </div>
       )}

@@ -35,7 +35,7 @@ export default function Hero() {
           "
           style={{ fontSize: "clamp(3rem, 8vw, 6.5rem)" }}
         >
-          iPhone 16 Pro
+          iPhone 17 Pro
         </h1>
 
         {/* Tagline */}

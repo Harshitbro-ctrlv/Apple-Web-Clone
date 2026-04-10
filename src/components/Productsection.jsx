@@ -42,8 +42,20 @@ export default function ProductSection({
           </p>
 
           <div className="flex gap-3 flex-wrap">
-            <a href="#" className="btn-apple">Learn more</a>
-            <a href="#store" className="btn-apple-outline">Buy</a>
+            <button
+              className="bg-[#0071e3] hover:bg-[#0077ed] text-white text-[17px] 
+              rounded-full px-6 py-3 border-none cursor-pointer transition-colors duration-200"
+            >
+              Learn more
+            </button>
+            <button
+              onClick={() => setPage("store")}
+              className="bg-transparent text-[#0071e3] text-[17px] 
+              border border-[#0071e3] rounded-full px-6 py-3 cursor-pointer 
+              hover:bg-[#0071e3] hover:text-white transition-all duration-200"
+            >
+              Buy
+            </button>
           </div>
         </div>
 
